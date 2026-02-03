@@ -1,0 +1,36 @@
+﻿$gitignore = @"
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*
+!.env.example
+
+# Python Cache & Build Files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+
+# Vector Stores / Local Databases / RAG Data
+*.sqlite3
+*.db
+chroma_db/
+faiss_index/
+
+# IDE & OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+"@
+
+Set-Content -Path .gitignore -Value $gitignore -Encoding UTF8

@@ -1,29 +1,27 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
 
-app =  FastAPI(
-    title="AI writing studio",
-    description="AI-powered content generation plartform",
+from generate import generate_response
+
+app = FastAPI(
+    title="AI Customer Support API",
     version="1.0.0"
 )
 
 
-
-app.data_middleware(
-    CORSNiddleware.
-    allow_origins=[
-        "https://127.0.0.1:5500",
-        "http://localhost:5500"
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Request schema
+class ChatRequest(BaseModel):
+    question: str
 
 
+# API endpoint
+@app.post("/chat")
+def chat(request: ChatRequest):
 
-@app.get("/health")
-def health_check():
-    return{
-        "status":"sucess",
-        "message":"writing studio running"
+    answer = generate_response(request.question)
+
+    return {
+        "status": "success",
+        "question": request.question,
+        "answer": answer
     }
